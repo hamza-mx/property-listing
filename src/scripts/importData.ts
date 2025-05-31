@@ -32,6 +32,28 @@ async function createDefaultAdmin() {
   }
 }
 
+// Define interface for CSV row data
+interface PropertyCSVData {
+  id: string;
+  title: string;
+  type: string;
+  price: string;
+  state: string;
+  city: string;
+  areaSqFt: string;
+  bedrooms: string;
+  bathrooms: string;
+  amenities: string;
+  furnished: string;
+  availableFrom: string;
+  listedBy: string;
+  tags: string;
+  colorTheme: string;
+  rating: string;
+  isVerified: string;
+  listingType: string;
+}
+
 // Import properties from CSV
 async function importProperties() {
   try {
@@ -41,10 +63,10 @@ async function importProperties() {
     const adminId = await createDefaultAdmin();
     console.log('Admin user created/found');
 
-    const results: any[] = [];
+    const results: PropertyCSVData[] = [];
     fs.createReadStream('data/properties.csv')
       .pipe(csv())
-      .on('data', (data) => results.push(data))
+      .on('data', (data: PropertyCSVData) => results.push(data))
       .on('end', async () => {
         try {
           // Clear existing properties
