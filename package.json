@@ -10,7 +10,8 @@
     "start": "node dist/index.js",
     "build": "tsc",
     "dev": "ts-node src/index.ts",
-    "vercel-build": "npm run build"
+    "vercel-build": "tsc",
+    "postinstall": "tsc"
   },
   "dependencies": {
     "@types/mongoose": "^5.11.97",
